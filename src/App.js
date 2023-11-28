@@ -1,6 +1,10 @@
 import './App.css';
+import { useCallback, useContext, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Home from "./components/home/Home";
+import { initCatalog } from "./store/actions/metadataAction";
+import useAuth from "./hooks/useAuth";
 
 
 const theme = createTheme({
@@ -18,6 +22,19 @@ const theme = createTheme({
 });
 
 function App() {
+
+  const { AuthContext } = useAuth();
+  const { accessToken } = useContext(AuthContext);
+  const dispatch = useDispatch();
+
+  const initPageData = useCallback(() => {
+    dispatch(initCatalog(accessToken));
+  }, [dispatch, accessToken]);
+
+  useEffect(() => {
+    initPageData();
+  }, [initPageData]);
+
   return (
     <ThemeProvider theme={theme}>
       <Home />

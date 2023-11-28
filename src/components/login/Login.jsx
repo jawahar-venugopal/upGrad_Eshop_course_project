@@ -31,7 +31,7 @@ const Login = () => {
 	const [formData, setFormData] = useState(initialState);
 	const [busy, setBusy] = useState(false);
 	const { AuthContext } = useAuth();
-	const { login, loggedInUser } = useContext(AuthContext);
+	const { userLogin, loggedInUser } = useContext(AuthContext);
 	const history = useNavigate();
 	const location = useLocation();
 	const { from } = (location && location.state) || { from: { pathname: "/home" } };
@@ -63,7 +63,7 @@ const Login = () => {
 		}
 		setFormData(data);
 		if (validDetails) {
-			login(requestJson.username, requestJson.password).then(() => {
+			userLogin(requestJson.username, requestJson.password).then(() => {
 				// do nothing
 				broadcastAlert("Login successful", "success");
 				setBusy(false);

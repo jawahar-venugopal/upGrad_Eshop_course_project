@@ -50,7 +50,7 @@ const SignUp = () => {
 	const [formData, setFormData] = useState(initialState);
 	const [busy, setBusy] = useState(false);
 	const { ServicesCtx } = useServices();
-	const { broadcastMessage } = useContext(ServicesCtx);
+	const { broadcastAlert } = useContext(ServicesCtx);
 	const { AuthContext } = useAuth();
 	const { loggedInUser } = useContext(AuthContext);
 
@@ -76,11 +76,11 @@ const SignUp = () => {
 		setFormData(data);
 		if (valid) {
 			doUserSignUp(requestJson).then(json => {
-				broadcastMessage(json.message, "success");
+				broadcastAlert(json.message, "success");
 				setBusy(false);
 				setFormData(initialState);
 			}).catch(json => {
-				broadcastMessage(json.reason, "error");
+				broadcastAlert(json.reason, "error");
 				setBusy(false);
 			});
 		} else {
