@@ -15,6 +15,7 @@ import ProductListing from "../productListing/ProductListing";
 import BroadcastAlert from "../broadcastAlert/BroadcastAlert";
 import {createProduct, modifyProduct} from "../../api/productAPIs";
 import NavBar from "../navBar/NavBar";
+import PlaceOrder from "../placeOrder/PlaceOrder";
 
 const Home = () => {
 	return (
@@ -96,6 +97,14 @@ const Home = () => {
 							element={
 								<ProtectedRoute >
 									<ProductDetails />
+								</ProtectedRoute>
+							}
+						/>
+						<Route
+							path="/product/order"
+							element={
+								<ProtectedRoute >
+									<PlaceOrder	/>
 								</ProtectedRoute>
 							}
 						/>
